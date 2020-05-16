@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.kelimeavigame;
+package com.mycompany.kelimeavigame.views;
 
 /**
  *
@@ -16,6 +16,7 @@ public class Intro extends javax.swing.JFrame {
      */
     public Intro() {
         initComponents();
+        setLocationRelativeTo(null);
        
     }
 
@@ -29,25 +30,25 @@ public class Intro extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        joinGameButton = new javax.swing.JButton();
+        createGameButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Welcome To Kelime Avı Game");
         jLabel1.setName(""); // NOI18N
 
-        jButton1.setText("Join Game");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        joinGameButton.setText("Join Game");
+        joinGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                joinGameButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Create Game");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        createGameButton.setText("Create Game");
+        createGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                createGameButtonActionPerformed(evt);
             }
         });
 
@@ -59,8 +60,8 @@ public class Intro extends javax.swing.JFrame {
                 .addGap(123, 123, 123)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(createGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(joinGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -69,26 +70,26 @@ public class Intro extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addComponent(jLabel1)
                 .addGap(69, 69, 69)
-                .addComponent(jButton1)
+                .addComponent(joinGameButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(createGameButton)
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void joinGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joinGameButtonActionPerformed
         dispose();
         ClientLogin clientLoginWindow = new ClientLogin();
         clientLoginWindow.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_joinGameButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void createGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGameButtonActionPerformed
         dispose();
         ServerLogin serverLoginWindow = new ServerLogin();
         serverLoginWindow.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_createGameButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,8 +127,8 @@ public class Intro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton createGameButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton joinGameButton;
     // End of variables declaration//GEN-END:variables
 }
