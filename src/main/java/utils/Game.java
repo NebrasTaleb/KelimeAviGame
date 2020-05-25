@@ -17,4 +17,5 @@ public class Game {
     public static String clientNickname;
     public static Client client;
     public static javax.swing.JFrame clientLoginWindow;
+    public static javax.swing.JFrame clientGameInfoWindow;
 }

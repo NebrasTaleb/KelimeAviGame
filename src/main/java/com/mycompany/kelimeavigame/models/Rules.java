@@ -1,6 +1,9 @@
 package com.mycompany.kelimeavigame.models;
 
-public class Rules {
+import java.io.Serializable;
+
+public class Rules implements Serializable {
+
     public int gameWidth;
     public int gameHeight;
     public int numOfBlocks;
@@ -18,5 +21,5 @@ public class Rules {
         this.numOf2X = numOf2X;
         this.numOf3X = numOf3X;
     }
-    
+
 }

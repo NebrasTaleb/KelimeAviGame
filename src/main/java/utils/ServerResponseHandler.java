@@ -1,6 +1,7 @@
 package utils;
 
 import CommunicationModels.Message;
+import com.mycompany.kelimeavigame.models.Rules;
 import com.mycompany.kelimeavigame.views.ClientWaitingWindow;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -70,8 +71,13 @@ public class ServerResponseHandler implements Runnable {
             // a player has just disjoined from the game, so update the players list
             System.out.println(Game.clientNickname + " received playerDisjooined signal! and the new list is : " + serverResponse.content + " and threadIsRunning value is " + threadIsRunning);
             ClientWaitingWindow.updatePlayersList((List<String>) serverResponse.content);
-
+        } else if (serverResponse.header.equals("gameInfo")) {
+            var gameInfoWindow = (GameInfoWindow) Game.clientGameInfoWindow;
+            System.out.println("received game info  " + (Rules) serverResponse.content);
+            gameInfoWindow.initFieldsWithRemoteGameInfo((Rules) serverResponse.content);
+            gameInfoWindow.setVisible(true);
         }
+
     }
 
     private void showErrorMessage(Message serverResponse) {

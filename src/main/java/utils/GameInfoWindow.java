@@ -39,11 +39,19 @@ public class GameInfoWindow extends javax.swing.JFrame {
     }
 
     private void fetchGameInfoAndInitFields() {
-        try {
-            Game.client.objectSender.writeObject(new Message("gameInfo", Game.client.nickname));
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
+
+    }
+
+    public void initFieldsWithRemoteGameInfo(Rules gameRules) {
+        String widthAndHeight = Integer.toString(gameRules.gameWidth);
+        widthAndHeight += " X ";
+        widthAndHeight += Integer.toString(gameRules.gameHeight);
+        widthHeightEditText.setText(widthAndHeight);
+        numOfBlocksEditText.setText(Integer.toString(gameRules.numOfBlocks));
+        winningPointsEditText.setText(Integer.toString(gameRules.winningPoints));
+        numOfGamesEditText.setText(Integer.toString(gameRules.numOfGames));
+        numOf2XBlocksEditText.setText(Integer.toString(gameRules.numOf2X));
+        numOf3XBlocksEditText.setText(Integer.toString(gameRules.numOf3X));
     }
 
     @SuppressWarnings("unchecked")

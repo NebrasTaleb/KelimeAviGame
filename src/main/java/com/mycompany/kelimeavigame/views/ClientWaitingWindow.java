@@ -133,7 +133,13 @@ public class ClientWaitingWindow extends javax.swing.JFrame {
 
     private void gameInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameInfoButtonActionPerformed
         GameInfoWindow gameInfoWindowWindow = new GameInfoWindow("Client");
-        gameInfoWindowWindow.setVisible(true);
+        try {
+            Game.client.objectSender.writeObject(new Message("gameInfo", Game.client.nickname));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        // save it as a global variable 
+        Game.clientGameInfoWindow = gameInfoWindowWindow;
     }//GEN-LAST:event_gameInfoButtonActionPerformed
 
 
