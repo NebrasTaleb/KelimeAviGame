@@ -1,14 +1,15 @@
 package com.mycompany.kelimeavigame.views;
 
+import utils.Game;
+
 public class Intro extends javax.swing.JFrame {
 
     public Intro() {
         initComponents();
         setLocationRelativeTo(null);
-       
+
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,6 +68,7 @@ public class Intro extends javax.swing.JFrame {
         dispose();
         ClientLogin clientLoginWindow = new ClientLogin();
         clientLoginWindow.setVisible(true);
+        Game.clientLoginWindow = clientLoginWindow;
     }//GEN-LAST:event_joinGameButtonActionPerformed
 
     private void createGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGameButtonActionPerformed
@@ -74,7 +76,6 @@ public class Intro extends javax.swing.JFrame {
         ServerLogin serverLoginWindow = new ServerLogin();
         serverLoginWindow.setVisible(true);
     }//GEN-LAST:event_createGameButtonActionPerformed
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

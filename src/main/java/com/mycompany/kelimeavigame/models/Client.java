@@ -1,13 +1,9 @@
 package com.mycompany.kelimeavigame.models;
 
-import java.io.BufferedReader;
+import CommunicationModels.Message;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.SocketChannel;
 import utils.Game;
 import utils.ServerResponseHandler;
 
@@ -16,30 +12,33 @@ JanGaraba-CodeExamples -> Java Text 2nd Ed -> Examples -> Chap3 -> MultiEchoClie
 Youtube channel : covers11 at : https://www.youtube.com/watch?v=nUI4zO6abH0
 Medium article : Blocking I/O and non-blocking I/O at : https://medium.com/coderscorner/tale-of-client-server-and-socket-a6ef54a74763
 Youtube channel : David Dobervich at : https://www.youtube.com/watch?v=ZIzoesrHHQo
+Youtube channel : zaneacademy at : https://www.youtube.com/watch?v=1up-oHjCcis
  */
 public class Client {
 
-    private String nickname;
-    private Socket socket;
-    private BufferedReader receiver;
-    private PrintWriter sender;
-    private ByteBuffer byteBuffer;
+    public String nickname;
+    public Socket socket;
+    public ObjectOutputStream objectSender;
+    private Message message;
+    public static ServerResponseHandler serverResponseHandler;
 
     public Client(String nickname) throws IOException {
         this.nickname = nickname;
 
         try {
             socket = new Socket(Game.clientConnectionInfo.serverIP, Game.clientConnectionInfo.serverPort);
-            ServerResponseHandler serverResponseHandler = new ServerResponseHandler(socket);
-            sender = new PrintWriter(socket.getOutputStream(), true);
-            // send client nickname to the server
-            sender.println(nickname);
+            objectSender = new ObjectOutputStream(socket.getOutputStream());
+            serverResponseHandler = new ServerResponseHandler(socket);
             // execute the serverResponseHandler on different thread
             new Thread(serverResponseHandler).start();
+            // send client nickname to the server
+            message = new Message("join", nickname);
+            objectSender.writeObject(message);
 
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
-        } 
+//            disconnect();
+        }
 //        finally {
 //            try {
 //                System.out.println("\nClosing connection...");
@@ -56,7 +55,7 @@ public class Client {
             if (socket != null) {
                 socket.close();
             }
-            System.out.println(nickname + " closed");
+            System.out.println(nickname + " disconnected");
 
         } catch (Exception e) {
             e.printStackTrace();;

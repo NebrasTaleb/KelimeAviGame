@@ -2,10 +2,14 @@ package com.mycompany.kelimeavigame.views;
 
 import com.mycompany.kelimeavigame.models.Client;
 import com.mycompany.kelimeavigame.models.ConnectionInfo;
-import javax.swing.SwingWorker;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.Game;
 
 public class ClientLogin extends javax.swing.JFrame {
+
+    public static final String CLIENT = "CLIENT";
 
     public ClientLogin() {
         initComponents();
@@ -122,13 +126,13 @@ public class ClientLogin extends javax.swing.JFrame {
     private void joinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joinButtonActionPerformed
         Game.clientNickname = nicknameEditText.getText();
         Game.clientConnectionInfo = getClientConnectionInfo();
-         new SwingWorker() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                Client client = new Client(Game.clientNickname);
-                return null;
-            }
-        }.execute();
+        try {
+            Client client = new Client(Game.clientNickname);
+            // save client object in Game class to be referenceable globally
+            Game.client = client;
+        } catch (IOException ex) {
+            Logger.getLogger(ClientLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_joinButtonActionPerformed
 
     private ConnectionInfo getClientConnectionInfo() {

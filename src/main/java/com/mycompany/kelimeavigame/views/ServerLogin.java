@@ -229,8 +229,9 @@ public class ServerLogin extends javax.swing.JFrame {
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         createGame();
         dispose();
-        WaitingWindow waitingWindow = new WaitingWindow();
+        ServerWaitingWindow waitingWindow = new ServerWaitingWindow();
         waitingWindow.addNewPlayerToList(Game.serverNickname);
+        
         waitingWindow.setVisible(true);
     }//GEN-LAST:event_createButtonActionPerformed
 

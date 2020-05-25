@@ -1,18 +1,15 @@
 package com.mycompany.kelimeavigame.views;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 import utils.Game;
 import utils.GameInfoWindow;
+import utils.GameUtils;
 
-public class WaitingWindow extends javax.swing.JFrame {
+public class ServerWaitingWindow extends javax.swing.JFrame {
 
     private static DefaultListModel<String> playersListModel;
 
-    public WaitingWindow() {
+    public ServerWaitingWindow() {
         initComponents();
         playersListModel = new DefaultListModel();
         playersList.setModel(playersListModel);
@@ -22,6 +19,34 @@ public class WaitingWindow extends javax.swing.JFrame {
     public static void addNewPlayerToList(String playerNickname) {
         String playerJoiningOrder = Integer.toString(playersListModel.size() + 1);
         playersListModel.addElement(playerJoiningOrder + "- " + playerNickname);
+    }
+
+    public static void removePlayerFromList(String playerNickname) {
+        // if the user who disjoined is the last one in the list, then remove last element form the list
+        String lastElement = playersListModel.get(playersListModel.size() - 1);
+        if (lastElement.contains(playerNickname)) {
+            playersListModel.remove(playersListModel.size() - 1);
+        } else {
+            // the disjoined player is not the last one in the list (nor the first because that is the game creator)
+            // get the index of the disjoined player
+            int disjoinedPlayerIndex = 1; // 1 will change. it is just a value for initialization
+            for (int index = 0; index < playersListModel.size(); index++) {
+                if (playersListModel.get(index).contains(playerNickname)) {
+                    disjoinedPlayerIndex = index;
+                    break;
+                }
+            }
+            // save the current content (before removing any element) of the list 
+            DefaultListModel<String> tempList = new DefaultListModel();
+            GameUtils.copyListToListExceptRemovedItem(Game.connectedPlayersNicknames, tempList, disjoinedPlayerIndex);
+            // remove all elements
+            playersListModel.removeAllElements();
+            int playerJoiningOrder = 0;
+            for (int index = 0; index < tempList.size(); index++) {
+                playerJoiningOrder++;
+                playersListModel.addElement(playerJoiningOrder + "- " + tempList.get(index));
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -100,7 +125,7 @@ public class WaitingWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startGameButtonActionPerformed
 
     private void gameInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameInfoButtonActionPerformed
-        GameInfoWindow gameInfoWindowWindow = new GameInfoWindow();
+        GameInfoWindow gameInfoWindowWindow = new GameInfoWindow("Server");
         gameInfoWindowWindow.setVisible(true);
     }//GEN-LAST:event_gameInfoButtonActionPerformed
 
