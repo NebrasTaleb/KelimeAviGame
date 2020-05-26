@@ -37,17 +37,7 @@ public class Client {
 
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
-//            disconnect();
         }
-//        finally {
-//            try {
-//                System.out.println("\nClosing connection...");
-//                disconnect();
-//            } catch (IOException ioEx) {
-//                System.out.println("Unable to disconnect!");
-//                System.exit(1);
-//            }
-//        }
     }
 
     private void disconnect() throws IOException {

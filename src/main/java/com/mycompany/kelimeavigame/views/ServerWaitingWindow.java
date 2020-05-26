@@ -121,7 +121,7 @@ public class ServerWaitingWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
-
+            
     }//GEN-LAST:event_startGameButtonActionPerformed
 
     private void gameInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameInfoButtonActionPerformed
